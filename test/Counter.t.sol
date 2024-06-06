@@ -2,6 +2,7 @@
 pragma solidity ^0.8.13;
 
 import {Test, console} from "forge-std/Test.sol";
+import {CounterScript} from "script/Counter.s.sol";
 import {Counter} from "../src/Counter.sol";
 
 contract CounterTest is Test {
@@ -20,5 +21,11 @@ contract CounterTest is Test {
     function testFuzz_SetNumber(uint256 x) public {
         counter.setNumber(x);
         assertEq(counter.number(), x);
+    }
+}
+
+contract CounterScriptTest is CounterScript, Test {
+    function test_contractsAreDeploy() public {
+        CounterScript.run();
     }
 }
